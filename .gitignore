@@ -51,3 +51,4 @@ app/bower_components
 test/bower_components/
 
 *.sublime-project
+*.sublime-workspace

@@ -1,0 +1,46 @@
+<script type="text/javascript" src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<polymer-element name="input-reason">
+  <template>
+    <content select="paper-input" inputValue="{{ value }}" on-change="{{valueChanged}}"></content>
+  </template>
+  <script>
+
+    var tilfredshedRef = new Firebase("https://tilfredshed.firebaseio.com/");
+    var tilfredshedPosRef = new Firebase("https://tilfredshed.firebaseio.com/positives/");
+    var tilfredshedNegRef = new Firebase("https://tilfredshed.firebaseio.com/negatives/");
+    var tilfredshedNeutRef = new Firebase("https://tilfredshed.firebaseio.com/neutrals/");  
+
+    Polymer('input-reason', {
+    	valueChanged: function() {
+        
+    		var input = this.getElementsByTagName('paper-input')[0];
+        var inputText = input.inputValue;
+
+        if (inputText == oldText || inputText == "") {
+          return false;
+        } else {
+          var oldText = inputText;
+          var timestamp = moment().format("YYYYMMDD");
+
+          switch (this.id) {
+            case "posInput":
+              tilfredshedPosRef.push({text: inputText, votes: [{date: timestamp}]});
+              break;
+            case "neutInput":
+              tilfredshedNeutRef.push({text: inputText, votes: [{date: timestamp}]});
+              break;
+            case "negInput":
+              tilfredshedNegRef.push({text: inputText, votes: [{date: timestamp}]});
+              break;            
+          }
+        
+        }
+        input.inputValue = "";
+        input.value = "";
+    	}
+    });
+  </script>
+</polymer-element>

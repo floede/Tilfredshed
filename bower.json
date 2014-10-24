@@ -1,0 +1,13 @@
+{
+  "name": "tilfredshed-v2",
+  "version": "0.0.0",
+  "dependencies": {
+    "core-elements": "Polymer/core-elements#^0.4.2",
+    "paper-elements": "Polymer/paper-elements#^0.4.2",
+    "polymer": "Polymer/polymer#^0.4.2",
+    "moment": "~2.8.3"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#^0.4.2"
+  }
+}

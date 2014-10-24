@@ -1,0 +1,98 @@
+$colWidth: 30%;
+
+$green: green;
+$yellow: yellow;
+$red: red;
+
+html,body {
+  height: 100%;
+  margin: 0;
+  background-color: #E5E5E5;
+  font-family: 'Francois One', sans-serif;
+}
+
+.col {
+  margin: 0 10px;
+  padding: 20px;
+  //width: $colWidth;
+  float: left;
+  background-color: #fff;   
+}
+
+$radius: 5px;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin vote-link {
+  margin: 5px 0;
+  padding: 3px 5px;
+  display: block;
+  @include border-radius($radius);
+}
+
+#overview {
+  #positives {
+    a {
+      @include vote-link;
+      background-color: $green;
+    }
+  }
+
+  #neutrals {
+    a {
+      @include vote-link;
+      background-color: $yellow;
+    }   
+  }
+
+  #negatives {
+    a {
+      @include vote-link;
+      background-color: $red;
+    }   
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:nth-child(even) {
+    background: #efefef;
+  }
+
+  h3 {
+    margin: 0 0 0 85px;
+  }
+
+  p {
+    margin: 0 0 0 85px;
+  }
+
+  a {
+    &.url {
+      background-color: #cecece;
+    }
+  }
+
+  img {
+    float: left;
+    margin-right: 10px;
+    width: 75px;
+  }
+}
+
+core-toolbar {
+  margin-bottom: 30px;
+}
+
+core-icon {
+}
+
+paper-button:hover {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+}
