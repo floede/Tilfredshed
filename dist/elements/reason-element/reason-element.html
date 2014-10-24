@@ -1,0 +1,45 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<script type="text/javascript" src="https://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
+
+<polymer-element name="reason-element" attributes="type, value" on-click="{{voteClicked}}">
+  <template>
+  	<style>
+   		:host {
+   			display: block;
+   		}
+      polyfill-next-selector { content: 'paper-button';}
+      ::content paper-button {
+        border-radius: 5px;
+        background-color: #fff;
+        margin: 5px 0;
+      }
+  	</style>
+    <content select="paper-button"></content>
+  </template>
+  <script>
+
+	var tilfredshedPosRef = new Firebase("https://tilfredshed.firebaseio.com/positives/");
+	var tilfredshedNegRef = new Firebase("https://tilfredshed.firebaseio.com/negatives/");
+	var tilfredshedNeutRef = new Firebase("https://tilfredshed.firebaseio.com/neutrals/");
+
+  	Polymer({
+  		voteClicked: function(event, detail, sender) {
+
+  			var timestamp = new Date().toISOString().slice(0,10).replace(/-/g,"");
+
+        switch(this.type) {
+  				case "positive": 
+  					tilfredshedPosRef.child(this.value).child("votes").push({date: timestamp});
+  					break;
+  				case "neutral": 
+  					tilfredshedNeutRef.child(this.value).child("votes").push({date: timestamp});
+  					break;
+  				case "negative": 
+  					tilfredshedNegRef.child(this.value).child("votes").push({date: timestamp});
+  					break;
+  			}
+  		}
+  	});
+  </script>
+</polymer-element>
