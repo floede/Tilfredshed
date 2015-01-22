@@ -18,7 +18,7 @@
         
     		var input = this.getElementsByTagName('paper-input')[0];
         var inputText = input.inputValue;
-
+        // Hack to solve paper input problem
         if (inputText == oldText || inputText == "") {
           return false;
         } else {
